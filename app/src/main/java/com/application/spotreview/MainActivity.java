@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.application.spotreview.auth.LoginActivity;
 import com.application.spotreview.auth.RegisterActivity;
+import com.application.spotreview.map.MapActivity;
 import com.application.spotreview.utils.PreferenceManager;
 import com.google.android.material.button.MaterialButton;
 
@@ -53,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // [로그인 후 상태] 버튼들
+        // [로그인 후 상태] 버튼들 MainActivity.java의 onCreate 내부 혹은 버튼 세팅하는 곳에 추가
         btnExploreMap.setOnClickListener(v -> {
-            Toast.makeText(this, "지도 화면 준비 중입니다!", Toast.LENGTH_SHORT).show();
-            // TODO: 나중에 MapActivity.class 연동 예정
+            // 버튼 누르면 지도 화면(MapActivity)으로 전환
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
         });
 
         btnLogout.setOnClickListener(v -> {
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
             checkLoginStatus(); // 화면 갱신
         });
+
     }
 
     @Override

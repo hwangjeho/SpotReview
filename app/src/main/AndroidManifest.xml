@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpotReview">
 
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="p4fv0uq67j" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

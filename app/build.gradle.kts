@@ -44,6 +44,9 @@ dependencies {
     // 4. 머티리얼 라이브러리도 안전하게 문자열로 고정 (기존 1.11.0 유지)
     implementation("com.google.android.material:material:1.11.0")
 
+    // 네이버 지도 SDK
+    implementation("com.naver.maps:map-sdk:3.17.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

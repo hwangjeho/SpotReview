@@ -32,7 +32,7 @@
             android:textSize="14sp"
             android:textColor="#636E72"
             android:layout_marginBottom="48dp"
-            android:textAlign="center"/>
+            android:textAlignment="center"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_main_login"
