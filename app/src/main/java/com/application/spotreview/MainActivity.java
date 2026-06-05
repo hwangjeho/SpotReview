@@ -95,18 +95,41 @@ public class MainActivity extends AppCompatActivity {
             tvWelcome.setText(loginId + "님, 환영합니다!");
 
             if (prefManager.isAdmin()) {
-                tvRole.setText("최고 관리자");
+                tvRole.setText("최고 관리자 (탭하여 관리)");
                 tvRole.setBackgroundColor(android.graphics.Color.parseColor("#FFEAF0"));
                 tvRole.setTextColor(android.graphics.Color.parseColor("#D63031"));
+                
+                // 관리자라면 관제실로 이동하는 기능 추가
+                tvRole.setOnClickListener(v -> {
+                    Intent intent = new Intent(this, com.application.spotreview.admin.AdminReportActivity.class);
+                    startActivity(intent);
+                });
             } else {
                 tvRole.setText("일반 회원");
                 tvRole.setBackgroundColor(android.graphics.Color.parseColor("#E1F5FE"));
                 tvRole.setTextColor(android.graphics.Color.parseColor("#0984E3"));
+                tvRole.setOnClickListener(null); // 클릭 리스너 해제
             }
+
+            // 실시간 인기 명소 로드
+            loadSpotRanking();
         } else {
             // 로그아웃 된 상태
             layoutLoggedOut.setVisibility(View.VISIBLE);
             layoutLoggedIn.setVisibility(View.GONE);
         }
+    }
+
+    private void loadSpotRanking() {
+        androidx.recyclerview.widget.RecyclerView rvRanking = findViewById(R.id.rv_spot_ranking);
+        if (rvRanking == null) return;
+
+        com.application.spotreview.database.ReviewDao reviewDao = new com.application.spotreview.database.ReviewDao(this);
+        java.util.List<com.application.spotreview.model.Review> rankingData = reviewDao.getSpotReviewCounts();
+
+        com.application.spotreview.map.SpotRankAdapter adapter = new com.application.spotreview.map.SpotRankAdapter();
+        rvRanking.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
+        rvRanking.setAdapter(adapter);
+        adapter.setItems(rankingData);
     }
 }

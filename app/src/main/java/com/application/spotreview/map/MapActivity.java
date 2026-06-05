@@ -1,9 +1,10 @@
 package com.application.spotreview.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,15 +47,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mapFragment.getMapAsync(this);
         }
 
-        Button btnMainMenu = findViewById(R.id.btn_main_menu);
-        btnMainMenu.setOnClickListener(v -> finish());
+        // 디자인 수정으로 Button이 아닌 ImageButton으로 변경되었습니다.
+        View btnMainMenu = findViewById(R.id.btn_main_menu);
+        if (btnMainMenu != null) {
+            btnMainMenu.setOnClickListener(v -> finish());
+        }
 
-        Button btnMajorSpot = findViewById(R.id.btn_major_spot);
-        btnMajorSpot.setOnClickListener(v -> {
-            if (naverMap != null) {
-                fetchRestaurantData("강남 맛집");
-            }
-        });
+        View btnMajorSpot = findViewById(R.id.btn_major_spot);
+        if (btnMajorSpot != null) {
+            btnMajorSpot.setOnClickListener(v -> {
+                if (naverMap != null) {
+                    fetchRestaurantData("고척동 맛집");
+                }
+            });
+        }
     }
 
     @Override
@@ -62,14 +68,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         this.naverMap = naverMap;
         naverMap.getUiSettings().setZoomControlEnabled(true);
 
-        // [중요] 하늘색 화면 방지: 지도가 준비되면 즉시 카메라를 동양미래대로 이동
-        // 37.500397, 126.866599 는 동양미래대학교 좌표입니다.
         LatLng initialPos = new LatLng(37.500397, 126.866599);
         CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(initialPos, 15);
         naverMap.moveCamera(cameraUpdate);
 
         // 데이터 로딩 시작
-        fetchRestaurantData("강남 맛집");
+        fetchRestaurantData("고척동 맛집");
     }
 
     private void fetchRestaurantData(String keyword) {
@@ -82,19 +86,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         NaverSearchService service = retrofit.create(NaverSearchService.class);
 
-        service.getLocalSearch(SEARCH_CLIENT_ID, SEARCH_CLIENT_SECRET, keyword, 20)
+        // 검색 개수를 50개로 늘려 더 많은 마커가 보이게 합니다.
+        service.getLocalSearch(SEARCH_CLIENT_ID, SEARCH_CLIENT_SECRET, keyword, 50)
                 .enqueue(new Callback<SearchResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().items == null || response.body().items.isEmpty()) {
-                                // 200 OK지만 결과가 없는 경우
                                 Toast.makeText(MapActivity.this, "검색 결과가 0건입니다.", Toast.LENGTH_SHORT).show();
                             } else {
                                 showMarkersOnMap(response.body());
                             }
                         } else {
-                            // 401, 403, 500 등 에러 발생 시
                             String errorMsg = "API 오류 발생: " + response.code();
                             Toast.makeText(MapActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                         }
@@ -102,7 +105,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     @Override
                     public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
-                        // 인터넷 연결 문제 등
                         Toast.makeText(MapActivity.this, "네트워크 연결에 실패했습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -118,8 +120,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         markerList.clear();
 
         for (SearchItem item : searchResponse.items) {
+            // 요청하신 대로 나누기 방식으로 좌표 변환
             LatLng latLng = new LatLng(item.mapy / 10000000.0, item.mapx / 10000000.0);
-            Log.d("MAP_DEBUG", "raw mapx=" + item.mapx + ", mapy=" + item.mapy);
 
             Marker marker = new Marker();
             marker.setPosition(latLng);
@@ -134,7 +136,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             marker.setOnClickListener(overlay -> {
                 SearchItem clickedItem = (SearchItem) marker.getTag();
                 if (clickedItem != null) {
-                    android.content.Intent intent = new android.content.Intent(MapActivity.this, SpotDetailActivity.class);
+                    Intent intent = new Intent(MapActivity.this, SpotDetailActivity.class);
                     intent.putExtra("title", clickedItem.title.replaceAll("<[^>]*>", ""));
                     intent.putExtra("address", clickedItem.roadAddress);
                     // 좌표 데이터 추가 전달
@@ -150,11 +152,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         // 데이터 로딩 완료 후 첫 번째 위치로 부드럽게 이동
         if (!searchResponse.items.isEmpty()) {
-            LatLng firstLatLng = new LatLng(
-                    searchResponse.items.get(0).mapy / 10000000.0,
-                    searchResponse.items.get(0).mapx / 10000000.0
-            );
-            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(firstLatLng.toLatLng())
+            SearchItem firstItem = searchResponse.items.get(0);
+            LatLng firstLatLng = new LatLng(firstItem.mapy / 10000000.0, firstItem.mapx / 10000000.0);
+            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(firstLatLng)
                     .animate(CameraAnimation.Easing, 1000);
             naverMap.moveCamera(cameraUpdate);
         }

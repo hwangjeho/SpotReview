@@ -1,9 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SpotReview" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/brand_yellow</item>
+        <item name="colorOnPrimary">@color/brand_dark</item>
+        <item name="android:windowBackground">@color/brand_bg</item>
+        <item name="colorPrimaryContainer">@color/brand_yellow</item>
+        <item name="colorOnPrimaryContainer">@color/brand_dark</item>
     </style>
 
     <style name="Theme.SpotReview" parent="Base.Theme.SpotReview" />
+
+    <!-- Custom Card Style -->
+    <style name="Widget.SpotReview.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <!-- Custom Button Style -->
+    <style name="Widget.SpotReview.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">28dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
 </resources>

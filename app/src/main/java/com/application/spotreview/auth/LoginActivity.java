@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity{
     private TextInputLayout tilId, tilPw;
     private TextInputEditText etId, etPw;
     private MaterialButton btnSubmit;
-    private TextView tvGoRegister;
+    private TextView tvGoRegister, tvFindId, tvFindPw;
 
     private UserDao userDao;
     private PreferenceManager prefManager;
@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity{
         etPw = findViewById(R.id.et_login_pw);
         btnSubmit = findViewById(R.id.btn_login_submit);
         tvGoRegister = findViewById(R.id.tv_go_to_register);
+        tvFindId = findViewById(R.id.tv_find_id);
+        tvFindPw = findViewById(R.id.tv_find_pw);
 
         // 3. 로그인 버튼 클릭 리스너
         btnSubmit.setOnClickListener(v -> {
@@ -51,6 +53,18 @@ public class LoginActivity extends AppCompatActivity{
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
             finish(); // 로그인 창을 닫으면서 회원가입 창으로 완전히 전환
+        });
+
+        // 5. 아이디 찾기 클릭 리스너
+        tvFindId.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, FindIdActivity.class);
+            startActivity(intent);
+        });
+
+        // 6. 비밀번호 찾기 클릭 리스너
+        tvFindPw.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
+            startActivity(intent);
         });
     }
 

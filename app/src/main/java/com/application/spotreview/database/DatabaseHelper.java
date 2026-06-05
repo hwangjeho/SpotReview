@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "SpotReview.sqlite";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "user_id TEXT PRIMARY KEY, " +
                 "password TEXT NOT NULL, " +
                 "name TEXT NOT NULL, " +
+                "is_blocked INTEGER DEFAULT 0, " +
                 "is_admin INTEGER DEFAULT 0);");
 
         // 2. Spot 테이블 생성
@@ -43,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "user_id TEXT, " +
                 "content TEXT NOT NULL, " +
                 "created_at DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                "is_deleted INTEGER DEFAULT 0, " +
                 "FOREIGN KEY(spot_id) REFERENCES Spot(spot_id) ON DELETE CASCADE, " +
                 "FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE);");
 

@@ -3,75 +3,100 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="@color/brand_bg">
 
-    <!-- Header Section -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_header"
+    <!-- Header Section (Inspired by Profile area in image) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/layout_header_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="16dp"
-        android:elevation="4dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="32dp"
+        app:cardBackgroundColor="@color/brand_yellow"
+        app:strokeWidth="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btn_detail_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_revert"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#333333" />
-
-        <TextView
-            android:id="@+id/tv_detail_title"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="장소 이름"
-            android:textColor="#212529"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_detail_back"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/tv_detail_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="주소 정보"
-            android:textColor="#6C757D"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_detail_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/btn_detail_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_revert"
+                    app:tint="@color/brand_dark"
+                    android:contentDescription="뒤로가기" />
+                <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardCornerRadius="40dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="4dp"
+                android:layout_marginTop="8dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:padding="16dp"
+                    android:background="@color/brand_accent"/>
+            </com.google.android.material.card.MaterialCardView>
 
-    <!-- Review List Section -->
+            <TextView
+                android:id="@+id/tv_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="장소 이름"
+                android:textColor="@color/brand_dark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_detail_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="주소 정보"
+                android:textColor="@color/brand_dark"
+                android:alpha="0.7"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Review List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_reviews"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
-        android:paddingBottom="80dp"
+        android:paddingBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_header" />
+        app:layout_constraintTop_toBottomOf="@id/layout_header_card" />
 
-    <!-- Input Section -->
-    <androidx.cardview.widget.CardView
+    <!-- Input Section (Pill shape card) -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="32dp"
         app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/brand_dark"
+        app:strokeWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
@@ -80,7 +105,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp">
+            android:paddingVertical="4dp">
 
             <EditText
                 android:id="@+id/et_review_input"
@@ -88,19 +113,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="따뜻한 리뷰를 남겨주세요"
+                android:hint="여기에 리뷰를 남겨주세요"
+                android:textColorHint="@color/brand_gray"
+                android:textColor="@color/white"
                 android:maxLines="3"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:textSize="15sp" />
 
             <ImageButton
                 android:id="@+id/btn_send_review"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/ic_launcher_background"
+                android:backgroundTint="@color/brand_yellow"
                 android:src="@android:drawable/ic_menu_send"
-                app:tint="#007AFF" />
+                android:padding="12dp"
+                app:tint="@color/brand_dark" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#FFFFFF"
+    android:background="@color/brand_bg"
     tools:context=".auth.LoginActivity">
 
     <LinearLayout
@@ -18,19 +18,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Spot Review"
-            android:textSize="32sp"
+            android:text="Welcome \nBack"
+            android:textSize="40sp"
             android:textStyle="bold"
-            android:textColor="#2D3436"
-            android:layout_marginTop="60dp"/>
+            android:textColor="@color/brand_dark"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="start"
+            android:lineHeight="48sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="계정에 로그인하세요"
+            android:text="로그인하여 명소를 발견하세요"
             android:textSize="16sp"
-            android:textColor="#636E72"
-            android:layout_marginBottom="48dp"/>
+            android:textColor="@color/brand_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="48dp"
+            android:layout_gravity="start"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_login_id"
@@ -39,10 +43,12 @@
             android:layout_height="wrap_content"
             android:hint="아이디"
             android:layout_marginBottom="16dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp">
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxStrokeColor="@color/brand_dark"
+            app:hintTextColor="@color/brand_dark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_login_id"
@@ -59,10 +65,12 @@
             android:hint="비밀번호"
             android:layout_marginBottom="32dp"
             app:passwordToggleEnabled="true"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp">
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxStrokeColor="@color/brand_dark"
+            app:hintTextColor="@color/brand_dark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_login_pw"
@@ -73,21 +81,54 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login_submit"
+            style="@style/Widget.SpotReview.Button"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="64dp"
             android:text="로그인하기"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:cornerRadius="12dp"
-            android:backgroundTint="#0984E3"
-            android:textColor="#FFFFFF"/>
+            android:backgroundTint="@color/brand_yellow"
+            android:textColor="@color/brand_dark"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:id="@+id/tv_find_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디 찾기"
+                android:textColor="@color/brand_gray"
+                android:padding="8dp"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:textColor="@color/brand_light_gray"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/tv_find_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 찾기"
+                android:textColor="@color/brand_gray"
+                android:padding="8dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_go_to_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="처음이신가요? 회원가입 하러가기"
-            android:textColor="#74B9FF"
+            android:text="처음이신가요? 가입하기"
+            android:textColor="@color/brand_dark"
+            android:textStyle="bold"
             android:layout_marginTop="24dp"
             android:padding="8dp"/>
 

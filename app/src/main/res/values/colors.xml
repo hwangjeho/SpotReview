@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#1A1A1A</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- UI Design Palette -->
+    <color name="brand_yellow">#FFC107</color>
+    <color name="brand_dark">#1A1A1A</color>
+    <color name="brand_bg">#FEF7E7</color>
+    <color name="brand_accent">#FFB300</color>
+    <color name="brand_gray">#636E72</color>
+    <color name="brand_light_gray">#DFE6E9</color>
+
+    <color name="status_green">#00B894</color>
+    <color name="status_red">#D63031</color>
 </resources>
