@@ -11,14 +11,17 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        // 네이버 지도 SDK 저장소를 안전하게 추가했습니다.
         maven { url = uri("https://repository.map.naver.com/archive/maven") }
     }
 }

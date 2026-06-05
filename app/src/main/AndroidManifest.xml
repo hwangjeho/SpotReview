@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.application.spotreview"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -19,7 +20,10 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="p4fv0uq67j" />
+            android:value="r6j06fr3wi" />
+        <meta-data
+            android:name="com.naver.maps.map.NCP_KEY_ID"
+            android:value="r6j06fr3wi" />
 
         <activity
             android:name=".MainActivity"

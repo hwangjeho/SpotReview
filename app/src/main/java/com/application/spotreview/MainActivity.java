@@ -13,6 +13,7 @@ import com.application.spotreview.auth.RegisterActivity;
 import com.application.spotreview.map.MapActivity;
 import com.application.spotreview.utils.PreferenceManager;
 import com.google.android.material.button.MaterialButton;
+import com.naver.maps.map.NaverMapSdk;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        NaverMapSdk.getInstance(this).setClient(
+//                new NaverMapSdk.NaverCloudPlatformClient("r6j06fr3wi")
+//        );
+
         setContentView(R.layout.activity_main);
 
         // 1. 세션 매니저 초기화
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
             checkLoginStatus(); // 화면 갱신
         });
+
 
     }
 

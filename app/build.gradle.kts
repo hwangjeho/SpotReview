@@ -45,7 +45,14 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
 
     // 네이버 지도 SDK
-    implementation("com.naver.maps:map-sdk:3.17.0")
+    implementation("com.naver.maps:map-sdk:3.23.2")
+
+    // 인터넷 통신 라이브러리 (Retrofit)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // JSON 데이터를 자바 객체로 파싱해주는 컨버터 (Gson)
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
