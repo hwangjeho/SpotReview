@@ -52,10 +52,14 @@ SpotReview/
 ├── app/
 │   ├── src/
 │   │   ├── main/
-│   │   │   ├── java/com/example/spotreview/
-│   │   │   │   ├── ui/          # 로그인, 메인, 지도, 리뷰 관련 Activity/Fragment
-│   │   │   │   ├── admin/       # 관리자 기능 관련 소스코드
-│   │   │   │   └── adapter/     # 리뷰 및 랭킹 리스트 뷰 어댑터
-│   │   │   └── res/             # 레이아웃 XML 및 이미지 리소스
-│   └── build.gradle
-└── README.md
+│   │   │   ├── java/com/application/spotreview/
+│   │   │   │   ├── admin/       # 관리자 기능 (리뷰 삭제/복원, 유저 차단/복원)
+│   │   │   │   ├── auth/        # 회원 관리 (회원가입, 로그인, ID/PW 찾기)
+│   │   │   │   ├── database/    # 로컬 DB 및 데이터 처리 관련 로직
+│   │   │   │   ├── map/         # 네이버 지도, 마커 클릭 이벤트, 리뷰 창 오픈
+│   │   │   │   ├── model/       # 데이터 구조 정의 (DTO / VO 등)
+│   │   │   │   ├── utils/       # 공통 유틸리티 기능 함수들
+│   │   │   │   └── MainActivity.java # 앱의 메인 진입점 및 대시보드 화면
+│   │   │   └── res/             # 레이아웃 XML, 이미지 및 테마 리소스
+│   └── build.gradle             # 앱 모듈 레벨 빌드 설정 파일
+└── README.md                    # 프로젝트 명세서
