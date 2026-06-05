@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "FOREIGN KEY(spot_id) REFERENCES Spot(spot_id) ON DELETE CASCADE, " +
                 "FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE);");
 
-        // [테스트 꿀팁] 관리자 계정이 하나 필요하므로 초기 생성 시 강제로 삽입해 둡니다.
+        // 관리자 계정 생성 (테스트용)
         db.execSQL("INSERT INTO User (user_id, password, name, is_admin) VALUES ('admin', 'admin123', '최고관리자', 1);");
     }
 

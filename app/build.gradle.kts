@@ -55,24 +55,12 @@ android {
 }
 
 dependencies {
-    // 1. SDK 33 호환 activity-ktx
     implementation("androidx.activity:activity-ktx:1.7.2")
-
-    // 2. 최신 libs.appcompat을 지우고 SDK 33 호환 버전(1.6.1)으로 고정
     implementation("androidx.appcompat:appcompat:1.6.1")
-
-    // 3. SDK 33 호환 constraintlayout
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    // 4. 머티리얼 라이브러리도 안전하게 문자열로 고정 (기존 1.11.0 유지)
     implementation("com.google.android.material:material:1.11.0")
-
-    // 네이버 지도 SDK
     implementation("com.naver.maps:map-sdk:3.23.2")
-
-    // 인터넷 통신 라이브러리 (Retrofit)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    // JSON 데이터를 자바 객체로 파싱해주는 컨버터 (Gson)
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     testImplementation(libs.junit)

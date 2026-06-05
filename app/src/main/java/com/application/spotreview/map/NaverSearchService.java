@@ -9,7 +9,7 @@ public interface NaverSearchService {
     Call<SearchResponse> getLocalSearch(
             @Header("X-Naver-Client-Id") String clientId,
             @Header("X-Naver-Client-Secret") String clientSecret,
-            @Query("query") String query,         // 검색어 (예: "시흥시청 맛집")
-            @Query("display") int display         // 가져올 개수 (최대 50개)
+            @Query("query") String query,         // 검색어
+            @Query("display") int display         // 가져올 개수 최대 50 개
     );
 }
