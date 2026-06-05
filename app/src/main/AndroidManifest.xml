@@ -20,10 +20,10 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="r6j06fr3wi" />
+            android:value="${ncpClientId}" />
         <meta-data
             android:name="com.naver.maps.map.NCP_KEY_ID"
-            android:value="r6j06fr3wi" />
+            android:value="${ncpClientId}" />
 
         <activity
             android:name=".MainActivity"

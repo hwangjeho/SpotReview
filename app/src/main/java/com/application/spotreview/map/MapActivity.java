@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.application.spotreview.BuildConfig;
 import com.application.spotreview.R;
 import com.naver.maps.geometry.LatLng;
-import com.naver.maps.geometry.Tm128;
 import com.naver.maps.map.CameraAnimation;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.MapFragment;
@@ -33,9 +32,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private NaverMap naverMap;
     private List<Marker> markerList = new ArrayList<>();
 
-    // ⚠️ 네이버 개발자 센터 검색용 키
-    private final String SEARCH_CLIENT_ID = "Ivz6wdspLMyzf7vNuFxe";
-    private final String SEARCH_CLIENT_SECRET = "fVDadg0EQ_";
+    // .env 파일로부터 BuildConfig를 통해 키를 가져옵니다.
+    private final String SEARCH_CLIENT_ID = BuildConfig.NAVER_SEARCH_ID;
+    private final String SEARCH_CLIENT_SECRET = BuildConfig.NAVER_SEARCH_SECRET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mapFragment.getMapAsync(this);
         }
 
-        // 디자인 수정으로 Button이 아닌 ImageButton으로 변경되었습니다.
         View btnMainMenu = findViewById(R.id.btn_main_menu);
         if (btnMainMenu != null) {
             btnMainMenu.setOnClickListener(v -> finish());
@@ -86,7 +84,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         NaverSearchService service = retrofit.create(NaverSearchService.class);
 
-        // 검색 개수를 50개로 늘려 더 많은 마커가 보이게 합니다.
         service.getLocalSearch(SEARCH_CLIENT_ID, SEARCH_CLIENT_SECRET, keyword, 50)
                 .enqueue(new Callback<SearchResponse>() {
                     @Override
@@ -113,14 +110,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void showMarkersOnMap(SearchResponse searchResponse) {
         if (naverMap == null || searchResponse.items == null) return;
 
-        // 기존 마커 제거
         for (Marker marker : markerList) {
             marker.setMap(null);
         }
         markerList.clear();
 
         for (SearchItem item : searchResponse.items) {
-            // 요청하신 대로 나누기 방식으로 좌표 변환
             LatLng latLng = new LatLng(item.mapy / 10000000.0, item.mapx / 10000000.0);
 
             Marker marker = new Marker();
@@ -128,18 +123,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             String cleanTitle = item.title.replaceAll("<[^>]*>", "");
             marker.setCaptionText(cleanTitle);
             marker.setMap(naverMap);
-
-            // 마커 클릭 시 해당 장소의 정보를 전달하기 위해 tag에 저장
             marker.setTag(item);
 
-            // 마커 클릭 리스너 추가
             marker.setOnClickListener(overlay -> {
                 SearchItem clickedItem = (SearchItem) marker.getTag();
                 if (clickedItem != null) {
                     Intent intent = new Intent(MapActivity.this, SpotDetailActivity.class);
                     intent.putExtra("title", clickedItem.title.replaceAll("<[^>]*>", ""));
                     intent.putExtra("address", clickedItem.roadAddress);
-                    // 좌표 데이터 추가 전달
                     intent.putExtra("lat", latLng.latitude);
                     intent.putExtra("lng", latLng.longitude);
                     startActivity(intent);
@@ -150,7 +141,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             markerList.add(marker);
         }
 
-        // 데이터 로딩 완료 후 첫 번째 위치로 부드럽게 이동
         if (!searchResponse.items.isEmpty()) {
             SearchItem firstItem = searchResponse.items.get(0);
             LatLng firstLatLng = new LatLng(firstItem.mapy / 10000000.0, firstItem.mapx / 10000000.0);
