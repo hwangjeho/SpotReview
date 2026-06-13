@@ -120,15 +120,23 @@
                 android:padding="16dp"
                 android:textSize="15sp" />
 
-            <ImageButton
-                android:id="@+id/btn_send_review"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/ic_launcher_background"
-                android:backgroundTint="@color/brand_yellow"
-                android:src="@android:drawable/ic_menu_send"
-                android:padding="12dp"
-                app:tint="@color/brand_dark" />
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="@color/brand_yellow"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+                <ImageButton
+                    android:id="@+id/btn_send_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_send"
+                    android:padding="12dp"
+                    app:tint="@color/brand_dark"
+                    android:contentDescription="전송" />
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
